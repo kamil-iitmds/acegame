@@ -52,7 +52,7 @@ def myprint(hands):
         i = 0
         for hand in hands:
             if len(hand) != 0:
-                print(i , "->", hand, len(hand))
+                print(i, "->", hand, len(hand))
             i = i + 1
 
 
@@ -153,7 +153,6 @@ def play_round(hands,starting_player:int)->int:
             starting_player = 0
         flag = play_hand(hands[starting_player], cards_on_the_table)
         if flag is False:
-            # Bug Here
             if debug:
                 print("Cards  ", cards_on_the_table, "added to player ", ns)
             hand = hands[ns]
@@ -180,12 +179,11 @@ def play_game(hands):
     iter = 1
     while n_remaining(hands) > 1:
         if debug:
-            print(iter)
+            print("*********************")
+            print("iteration ",iter)
         iter = iter + 1
         myprint(hands)
         current_player = play_round(hands, current_player)
-        if debug:
-            print("*********************")
 
     for i in range(0,n_hands):
         if len(hands[i]) > 0:
