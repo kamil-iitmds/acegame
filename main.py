@@ -5,7 +5,7 @@
 # You can use any help necessary from the web even AI to solve this.
 # Make your code as readable as possible.
 
-debug = False
+debug = True
 ACE_VALUE = 14
 SPADE = 'S'
 family = ['S', 'H', 'C', 'D']
@@ -26,10 +26,8 @@ random.shuffle(cards)
 # make sure that generate deck generate the deck in the given order and use the above random seed for shuffling.
 
 
-def distribute_cards(cards:list,n_hands:int):
-    x = list()
-    for i in range(0, n_hands):
-        x.append(list())
+def distribute_cards(cards:list, n_hands:int):
+    x = [[] for _ in range(n_hands)]
     p = 0
     for i in range(0, len(cards)):
         x[p].append(cards[i])
@@ -81,16 +79,16 @@ def find_smallest_card(hand):
     if len(hand) == 0:
         return None
     m = min(hand, key=lambda x: x[1])
-    return find_inside_family(hand, m, family)
+    return find_across_families(hand, m, family)
 
 
-def find_inside_family(hand,m,family):
+def find_across_families(hand,m, family):
     m_card = None
     for f in family:
         if m_card is not None:
             break
         for card in hand:
-            if m[0] == f and m[1] == card[1]:
+            if card[0] == f and m[1] == card[1]:
                 m_card = card
                 break
     return m_card
@@ -100,7 +98,7 @@ def find_highest_card(hand):
     if len(hand) == 0:
         return None
     m = max(hand, key=lambda x: x[1])
-    return find_inside_family(hand,m,family[::-1])
+    return find_across_families(hand, m, family[::-1])
 
 
 def remove(hand, card):
