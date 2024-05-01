@@ -32,10 +32,10 @@ random.shuffle(cards)
 
 def distribute_cards(cards:list,n_hands:int):
     x = list()
-    for i in range(0,n_hands):
+    for i in range(0, n_hands):
         x.append(list())
     p = 0
-    for i in range(0,len(cards)):
+    for i in range(0, len(cards)):
         x[p].append(cards[i])
         p = p + 1
         if p == n_hands:
