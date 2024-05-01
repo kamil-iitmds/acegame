@@ -5,7 +5,7 @@
 # You can use any help necessary from the web even AI to solve this.
 # Make your code as readable as possible.
 
-debug = True
+debug = False
 ACE_VALUE = 14
 SPADE = 'S'
 family = ['S', 'H', 'C', 'D']
