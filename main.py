@@ -15,11 +15,7 @@ face_cards = ['J', 'Q', 'K', 'A']
 def generate_deck() -> list:
     # donot hard code this function.
     # S2,S3, ... SA,H2,H3,...,HA,C2,C3,...,CA,D2,D3,...,DA in the same order
-    cards = list()
-    for f in family:
-        for i in range(2, ACE_VALUE + 1):
-            cards.append((f, i))
-    return cards
+    return [(f, x) for f in family for x in range(2, ACE_VALUE+1)]
 
 
 cards = generate_deck()
