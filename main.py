@@ -46,6 +46,7 @@ def distribute_cards(cards:list,n_hands:int):
 hands = distribute_cards(cards, n_hands)
 
 
+# print function
 def myprint(hands):
     if debug:
         i = 0
@@ -55,6 +56,7 @@ def myprint(hands):
             i = i + 1
 
 
+# Just a utility function to replace 11 to 'J' during final printing. Ignore this
 def modify(hands):
     l = list()
     for card in hands:
@@ -76,7 +78,7 @@ def find_smallest_card_in_family(hand,selected_family):
     l = list(filter(lambda x: (x[0] == selected_family), hand))
     if len(l) == 0:
         return None
-    return min(l, key = lambda x: x[1])
+    return min(l, key=lambda x: x[1])
 
 
 def find_smallest_card(hand):
@@ -187,7 +189,7 @@ def play_game(hands):
 
     for i in range(0,n_hands):
         if len(hands[i]) > 0:
-            return (i,modify(hands[i]))
+            return i, modify(hands[i])
 
 
 loser, hand = play_game(hands)
