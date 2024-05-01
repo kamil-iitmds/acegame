@@ -5,7 +5,7 @@
 # You can use any help necessary from the web even AI to solve this.
 # Make your code as readable as possible.
 
-debug = True
+debug = False
 ACE_VALUE = 14
 SPADE = 'S'
 family = ['S', 'H', 'C', 'D']
@@ -50,14 +50,14 @@ def myprint(hands):
             i = i + 1
 
 
-# Just a utility function to replace 11 to 'J' during final printing. Ignore this
+# Just a utility function to replace 11 to 'J' during final printing.
 def modify(hands):
     l = list()
     for card in hands:
         if card[1] >= 11:
-            l.append((card[0], face_cards[card[1]-11]))
+            l.append(str(card[0]) + face_cards[card[1]-11])
         else:
-            l.append((card[0], card[1]))
+            l.append(str(card[0]) + str(card[1]))
     return l
 
 
@@ -82,7 +82,7 @@ def find_smallest_card(hand):
     return find_across_families(hand, m, family)
 
 
-def find_across_families(hand,m, family):
+def find_across_families(hand, m, family):
     m_card = None
     for f in family:
         if m_card is not None:
