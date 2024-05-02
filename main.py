@@ -5,7 +5,7 @@
 # You can use any help necessary from the web even AI to solve this.
 # Make your code as readable as possible.
 
-debug = False
+debug = True
 ACE_VALUE = 14
 SPADE = 'S'
 family = ['S', 'H', 'C', 'D']
@@ -31,9 +31,7 @@ def distribute_cards(cards:list, n_hands:int):
     p = 0
     for i in range(0, len(cards)):
         x[p].append(cards[i])
-        p = p + 1
-        if p == n_hands:
-            p = 0
+        p = (p + 1) % n_hands
     return x
 
 
@@ -69,17 +67,15 @@ def find_starting_player_index():
 
 
 def find_smallest_card_in_family(hand,selected_family):
-    l = list(filter(lambda x: (x[0] == selected_family), hand))
-    if len(l) == 0:
-        return None
-    return min(l, key=lambda x: x[1])
+    return min(list(filter(lambda x: (x[0] == selected_family), hand)), key=lambda x: x[1], default=None)
 
 
 def find_smallest_card(hand):
-    if len(hand) == 0:
-        return None
-    m = min(hand, key=lambda x: x[1])
-    return find_across_families(hand, m, family)
+    return find_across_families(hand, min(hand, key=lambda x: x[1], default=None), family)
+
+
+def find_highest_card(hand):
+    return find_across_families(hand, max(hand, key=lambda x: x[1], default=None), family[::-1])
 
 
 def find_across_families(hand, m, family):
@@ -92,13 +88,6 @@ def find_across_families(hand, m, family):
                 m_card = card
                 break
     return m_card
-
-
-def find_highest_card(hand):
-    if len(hand) == 0:
-        return None
-    m = max(hand, key=lambda x: x[1])
-    return find_across_families(hand, m, family[::-1])
 
 
 def remove(hand, card):
